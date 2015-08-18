@@ -43,11 +43,11 @@ RUN wget https://gforge.inria.fr/frs/download.php/file/32994/CGAL-4.3.tar.gz &&\
     cd CGAL-4.3 &&\
     mkdir build && cd build &&\
     cmake .. &&\
-    make -j3 && make install
+    make && make install
 
 # download and compile SFCGAL
 RUN git clone https://github.com/Oslandia/SFCGAL.git
-RUN cd SFCGAL && cmake . && make -j3 && make install
+RUN cd SFCGAL && cmake . && make && make install
 # cleanup
 RUN rm -Rf SFCGAL
 
@@ -55,7 +55,7 @@ RUN rm -Rf SFCGAL
 RUN wget http://download.osgeo.org/postgis/source/postgis-2.1.8.tar.gz
 RUN tar -xzf postgis-2.1.8.tar.gz
 RUN cd postgis-2.1.8 && ./configure --with-sfcgal=/usr/local/bin/sfcgal-config
-RUN cd postgis-2.1.8 && make -j3 && make install
+RUN cd postgis-2.1.8 && make && make install
 # cleanup
 RUN rm -Rf postgis-2.1.8.tar.gz postgis-2.1.8
 
@@ -64,7 +64,7 @@ RUN git clone https://github.com/pgRouting/pgrouting.git &&\
     cd pgrouting &&\
     mkdir build && cd build &&\
     cmake -DWITH_DOC=OFF -DWITH_DD=ON .. &&\
-    make -j3 && make install
+    make && make install
 # cleanup
 RUN rm -Rf pgrouting
 
@@ -73,14 +73,14 @@ RUN git clone https://github.com/PDAL/PDAL.git pdal
 RUN mkdir PDAL-build && \
     cd PDAL-build && \
     cmake ../pdal && \
-    make -j3 && \
+    make && \
     make install
 # cleanup
 RUN rm -Rf pdal && rm -Rf PDAL-build
 
 # Compile PointCloud
 RUN git clone https://github.com/pramsey/pointcloud.git
-RUN cd pointcloud && ./autogen.sh && ./configure && make -j3 && make install
+RUN cd pointcloud && ./autogen.sh && ./configure && make && make install
 # cleanup
 RUN rm -Rf pointcloud
 
